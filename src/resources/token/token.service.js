@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
 const uuid = require('uuid');
-const { AUTHENTICATION_ERROR } = require('../../errors/appErrors');
 
 const tokenRepo = require('./token.db.repository');
 const {
@@ -10,12 +9,7 @@ const {
   JWT_REFRESH_EXPIRE_TIME
 } = require('../../common/config');
 
-const refresh = async (userId, tokenId) => {
-  const token = await tokenRepo.get(userId, tokenId);
-  if (Date.now() > token.expire) {
-    throw new AUTHENTICATION_ERROR('Token is expired');
-  }
-
+const refresh = async userId => {
   return getTokens(userId);
 };
 
