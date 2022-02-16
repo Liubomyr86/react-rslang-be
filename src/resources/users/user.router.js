@@ -13,6 +13,11 @@ router.post('/', validator(user, 'body'), async (req, res) => {
   res.status(OK).send(userEntity.toResponse());
 });
 
+router.get('', async (req, res) => {
+  const userEntity = await userService.get(req.userId);
+  res.status(OK).send(userEntity.toResponse());
+});
+
 router.get(
   '/:id',
   userIdValidator,
