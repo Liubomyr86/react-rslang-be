@@ -190,6 +190,22 @@ paths:
                   $ref: "#/components/schemas/User"
         422:
           description: Incorrect e-mail or password
+    get:
+      tags:
+        - Users
+      summary: Get current user
+      description: Gets current user
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        404:
+          description: User not found
   /users/{id}:
     parameters:
       - name: id
